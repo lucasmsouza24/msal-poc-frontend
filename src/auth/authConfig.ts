@@ -4,7 +4,7 @@ export const msalConfig: Configuration = {
   auth: {
     clientId: import.meta.env.VITE_MSAL_CLIENT_ID, // Your app registration App ID
     authority: import.meta.env.VITE_MSAL_AUTHORITY, // Your tenant ID
-    redirectUri: "http://localhost:5173", // Must match the redirect URI in app registration
+    redirectUri: import.meta.env.VITE_REDIRECT_URI, // Must match the redirect URI in app registration
   },
   cache: {
     cacheLocation: "localStorage", // Use localStorage so popup and parent share the auth state

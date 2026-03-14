@@ -3,3 +3,8 @@ dist
 .git
 .gitignore
 README.md
+
+# certs
+*.pem
+*.key
+*.crt

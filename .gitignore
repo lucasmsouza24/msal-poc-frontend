@@ -148,3 +148,8 @@ vite.config.ts.timestamp-*
 *.njsproj
 *.sln
 *.sw?
+
+# certs
+*.pem
+*.key
+*.crt

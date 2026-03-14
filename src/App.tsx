@@ -1,17 +1,16 @@
 import './App.css'
+import { ConfigProvider } from './contexts/ConfigContext'
 import AuthContent from './components/AuthContent'
 
 function App() {
-  const BACKEND_URI = import.meta.env.VITE_BACKEND_URI
-
   return (
-    <>
+    <ConfigProvider>
       <h1>MSAL Auth POC!</h1>
 
       <section>
-        <AuthContent BACKEND_URI={BACKEND_URI}/>
+        <AuthContent />
       </section>
-    </>
+    </ConfigProvider>
   )
 }
 

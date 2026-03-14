@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react'
+import { useConfig } from '../contexts/ConfigContext'
 import LoggedIn from '../pages/LoggedIn/LoggedIn'
 import LoggedOut from '../pages/LoggedOut/LoggedOut'
 
-interface AuthContentProps {
-    BACKEND_URI: string
-}
-
-function AuthContent({BACKEND_URI}: AuthContentProps) {
+function AuthContent() {
+  const { BACKEND_URI } = useConfig()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [loading, setLoading] = useState(true)
 
@@ -24,13 +22,13 @@ function AuthContent({BACKEND_URI}: AuthContentProps) {
       })
       .catch(() => setIsAuthenticated(false))
       .finally(() => setLoading(false))
-  }, [])
+  }, [BACKEND_URI])
 
   if (loading) {
     return <p>Loading...</p>
   }
 
-  return isAuthenticated ? <LoggedIn BACKEND_URI={BACKEND_URI}/> : <LoggedOut BACKEND_URI={BACKEND_URI}/>
+  return isAuthenticated ? <LoggedIn /> : <LoggedOut />
 }
 
 export default AuthContent

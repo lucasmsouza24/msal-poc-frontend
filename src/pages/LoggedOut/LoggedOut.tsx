@@ -1,11 +1,9 @@
+import { useConfig } from '../../contexts/ConfigContext'
 import Button from '../../components/Button/Button'
 import './LoggedOut.css'
 
-interface LoggedOutProps {
-    BACKEND_URI: string
-}
-
-function LoggedOut({BACKEND_URI}: LoggedOutProps) {
+function LoggedOut() {
+    const { BACKEND_URI } = useConfig()
 
     const handleLogin = () => {
         window.location.href = `${BACKEND_URI}/auth/login`

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: msal-app-service
+spec:
+  selector:
+    app: msal-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

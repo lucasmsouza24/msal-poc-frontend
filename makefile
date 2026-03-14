@@ -1,4 +1,4 @@
-.PHONY: push docker-up docker-down k8s-frontend-up k8s-frontend-down ingress-up setup-ingress update-hosts wait-ingress
+.PHONY: push docker-up docker-down k8s-frontend-up k8s-frontend-down ingress-up setup-ingress update-hosts wait-ingress cert-install
 
 # pushing to remote repositories
 push:
@@ -48,10 +48,21 @@ update-hosts:
 	sudo sed -i '/$(DOMAIN)/d' /etc/hosts
 	echo "$(MINIKUBE_IP) $(DOMAIN)" | sudo tee -a /etc/hosts
 
-ingress-up:
+ingress-up: cert-install
 	$(MAKE) setup-ingress
 	$(MAKE) update-hosts
 	@echo "Application available at: http://$(DOMAIN)"
+
+cert-install:
+	@command -v mkcert >/dev/null 2>&1 || { \
+		echo "⚠️  mkcert not installed. Install it first."; \
+		exit 1; \
+	}
+	mkcert -install
+	mkcert msal.local
+	kubectl create secret tls msal-local-tls \
+	--cert=msal.local.pem \
+	--key=msal.local-key.pem
 
 # k8s complete build
 k8s-build:

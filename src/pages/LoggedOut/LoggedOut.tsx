@@ -1,15 +1,14 @@
-import { useMsal } from '@azure/msal-react'
-import { loginRequest } from '../../auth/authConfig'
 import Button from '../../components/Button/Button'
 import './LoggedOut.css'
 
-function LoggedOut() {
-    const { instance } = useMsal()
+interface LoggedOutProps {
+    BACKEND_URI: string
+}
+
+function LoggedOut({BACKEND_URI}: LoggedOutProps) {
 
     const handleLogin = () => {
-        instance.loginRedirect(loginRequest).catch(e => {
-            console.error(e)
-        })
+        window.location.href = `${BACKEND_URI}/auth/login`
     }
 
     return (
